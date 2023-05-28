@@ -1,13 +1,14 @@
 {
   "name": "nuxt-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "build": "nuxt generate && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "pnpm build && nuxt preview",
     "postinstall": "nuxt prepare",
-    "prepare": "nuxt prepare"
+    "prepare": "nuxt prepare",
+    "deploy:vercel": "NITRO_PRESET=vercel-edge pnpm build"
   },
   "devDependencies": {
     "@maael/temtem-types": "^1.0.2",
