@@ -1,0 +1,10 @@
+// add dark styles here to prevent FOUC
+body.body--dark {
+  .q-card {
+    background: var(--q-dark);
+    color: #fff;
+  }
+  .q-separator {
+    background: rgba(255, 255, 255, 0.28);
+  }
+}
