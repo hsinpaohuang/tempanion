@@ -20,14 +20,14 @@ const getWeaknessClass = (weakness: number) =>
 
 <template>
   <div class="matchup-list row full-width">
-    <div v-if="uses.length" class="uses column">
-      <p class="text-h6 text-center">Use</p>
+    <div v-if="uses.length" class="uses column flex-1">
+      <p class="text-h6 text-center">Attack with</p>
       <div class="weakness-row row justify-evenly rounded-borders">
         <div
           v-for="weakness in uses"
           :key="weakness[0]"
           :class="getWeaknessClass(weakness[1])"
-          class="weakness-block column flex-center q-py-sm"
+          class="weakness-block column flex-center flex-1 q-py-sm"
         >
           <TypeIcon :type="weakness[0]" />
           <QBadge
@@ -41,14 +41,14 @@ const getWeaknessClass = (weakness: number) =>
       </div>
     </div>
     <QSeparator v-if="uses.length && avoids.length" vertical />
-    <div v-if="avoids.length" class="avoids column">
-      <p class="text-h6 text-center">Avoid</p>
+    <div v-if="avoids.length" class="avoids column flex-1">
+      <p class="text-h6 text-center">Avoid Using</p>
       <div class="weakness-row row justify-evenly rounded-borders">
         <div
           v-for="weakness in avoids"
           :key="weakness[0]"
           :class="getWeaknessClass(weakness[1])"
-          class="weakness-block column flex-center q-py-sm"
+          class="weakness-block column flex-center flex-1 q-py-sm"
         >
           <TypeIcon :type="weakness[0]" />
           <QBadge
@@ -69,13 +69,7 @@ const getWeaknessClass = (weakness: number) =>
   gap: 8px;
 }
 
-.uses,
-.avoids {
-  flex: 1;
-}
-
 .weakness-block {
-  flex: 1;
   gap: 8px;
 }
 

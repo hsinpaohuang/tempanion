@@ -26,6 +26,12 @@ export default defineNuxtConfig({
           /q-position-engine/,
           /q-card--bordered/,
           /q-avatar/,
+          /bg-dark/,
+          /q-field--dark/,
+          /q-field--focused/,
+          /q-field--highlighted/,
+          /q-field__focusable-action/,
+          /q-separator/,
         ],
       },
     ],
@@ -43,7 +49,7 @@ export default defineNuxtConfig({
       brand: {
         'primary': '#512da8',
         'secondary': '#01acc0',
-        'accent': '#9C27B0',
+        'accent': '#EF6D01',
 
         'dark': '#242424',
         // @ts-expect-error
@@ -56,6 +62,7 @@ export default defineNuxtConfig({
       },
       dark: 'auto',
     },
+    extras: { animations: ['fadeIn', 'fadeOut'] },
   },
   colorMode: {
     fallback: 'dark',

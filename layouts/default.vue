@@ -4,12 +4,14 @@ import {
   ionSearchOutline,
   ionMoon,
   ionSunny,
+  ionArrowUp,
 } from '@quasar/extras/ionicons-v7';
+import { debounce } from 'quasar';
 
 const { dark } = useQuasar();
 
 const showDrawer = useState(() => false);
-const miniState = useState(() => true);
+const miniState = useState(() => false);
 
 const isDarkMode = computed({
   get: () => dark.isActive,
@@ -28,6 +30,22 @@ if (process.client) {
 }
 
 const color = computed(() => (isDarkMode.value ? 'indigo' : 'amber'));
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const hasScrolled = useState(() => false);
+if (process.client) {
+  const onScroll = debounce(() => {
+    hasScrolled.value = window.scrollY > 500;
+  }, 200);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('scroll', onScroll);
+  });
+}
 
 // for preventing FOUC
 useHead({
@@ -71,9 +89,9 @@ useHead({
       </QToolbar>
     </QHeader>
 
+    <!-- TODO: add show-if-above when there are other pages to navigate to -->
     <QDrawer
       v-model="showDrawer"
-      show-if-above
       :mini="miniState"
       @mouseover="miniState = false"
       @mouseout="miniState = true"
@@ -94,8 +112,21 @@ useHead({
       </QScrollArea>
     </QDrawer>
 
-    <QPageContainer class="default-page">
+    <QPageContainer class="default-page column">
       <NuxtPage class="page" />
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <QPageSticky
+          v-show="hasScrolled"
+          position="bottom-right"
+          :offset="[18, 18]"
+        >
+          <QBtn fab color="accent" :icon="ionArrowUp" @click="scrollToTop" />
+        </QPageSticky>
+      </transition>
     </QPageContainer>
   </QLayout>
 </template>
@@ -103,9 +134,6 @@ useHead({
 <style scoped lang="scss">
 .default-page {
   height: 100vh;
-  :deep(.page) {
-    height: 100%;
-  }
 }
 
 a {
