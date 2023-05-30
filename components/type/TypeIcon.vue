@@ -13,7 +13,6 @@ if (!typeImgMap) {
     <img
       :src="typeImgMap[type]"
       alt="type"
-      loading="lazy"
       width="55"
       height="55"
       class="type-icon full-width"

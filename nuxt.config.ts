@@ -32,9 +32,12 @@ export default defineNuxtConfig({
           /q-field--highlighted/,
           /q-field__focusable-action/,
           /q-separator/,
+          /q-badge/,
         ],
       },
     ],
+    'nuxt-simple-sitemap',
+    'nuxt-simple-robots',
   ],
   routeRules: {
     '/matchup': { isr: 60 * 60 * 2 },
