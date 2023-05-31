@@ -6,36 +6,7 @@ export default defineNuxtConfig({
   typescript: { typeCheck: true },
   modules: [
     'nuxt-quasar-ui',
-    [
-      'nuxt-purgecss',
-      {
-        content: [
-          /* Copy of 'dist' from first npm run generate */
-          'dist/**/*.html',
-        ],
-        safelist: [
-          /* Generated as runtime, keep all related selectors */
-          /q-dark/,
-          /text-indigo/,
-          /q-ripple/,
-          /q-body--layout-animate/,
-          /q-toggle__inner--truthy/,
-          /q-toggle__inner--falsey/,
-          /q-tooltip/,
-          /q-tooltip--style/,
-          /q-position-engine/,
-          /q-card--bordered/,
-          /q-avatar/,
-          /bg-dark/,
-          /q-field--dark/,
-          /q-field--focused/,
-          /q-field--highlighted/,
-          /q-field__focusable-action/,
-          /q-separator/,
-          /q-badge/,
-        ],
-      },
-    ],
+    'nuxt-purgecss',
     'nuxt-simple-sitemap',
     'nuxt-simple-robots',
   ],
@@ -67,7 +38,35 @@ export default defineNuxtConfig({
     },
     extras: { animations: ['fadeIn', 'fadeOut'] },
   },
-  colorMode: {
-    fallback: 'dark',
+  purgecss: {
+    content: [
+      /* Copy of 'dist' from first npm run generate */
+      'dist/**/*.html',
+    ],
+    safelist: [
+      /* Generated as runtime, keep all related selectors */
+      /q-dark/,
+      /text-indigo/,
+      /q-ripple/,
+      /q-body--layout-animate/,
+      /q-toggle__inner--truthy/,
+      /q-toggle__inner--falsey/,
+      /q-tooltip/,
+      /q-tooltip--style/,
+      /q-position-engine/,
+      /q-card--bordered/,
+      /q-avatar/,
+      /bg-dark/,
+      /q-field--dark/,
+      /q-field--focused/,
+      /q-field--highlighted/,
+      /q-field__focusable-action/,
+      /q-separator/,
+      /q-badge/,
+    ],
+  },
+  sitemap: {
+    siteUrl: 'https://tempanion.hsinpaohuang.com',
+    exclude: ['/'],
   },
 });
