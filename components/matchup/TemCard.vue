@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useQuasar } from '~/.nuxt/imports';
 import { Tem } from '~/utils/types/tem';
 
 const { dark } = useQuasar();
@@ -23,7 +22,7 @@ defineProps<{ tem: Tem }>();
     </QItem>
     <QSeparator />
     <QItem class="q-pb-md">
-      <TemMatchupList :weaknesses="tem.weaknesses" />
+      <MatchupList :weaknesses="tem.weaknesses" />
     </QItem>
   </QCard>
 </template>

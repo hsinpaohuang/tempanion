@@ -39,7 +39,7 @@ const { result: filteredTems, search } = useSearch(tems.value, {
     <div class="title q-pb-lg">
       <h1 class="text-h3 text-center">{{ title }}</h1>
       <h2 class="text-body1 text-center">{{ description }}</h2>
-      <TemSearchBar class="searchbar q-py-sm" @search="search" />
+      <MatchupSearchBar class="searchbar q-py-sm" @search="search" />
     </div>
     <QVirtualScroll
       v-if="filteredTems.length"
@@ -50,7 +50,7 @@ const { result: filteredTems, search } = useSearch(tems.value, {
       v-slot="{ item }"
     >
       <div class="q-pb-md">
-        <TemCard :tem="item" />
+        <MatchupTemCard :tem="item" />
       </div>
     </QVirtualScroll>
     <p v-else class="text-center">No Temtems found.</p>
