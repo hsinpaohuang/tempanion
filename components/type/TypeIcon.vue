@@ -2,10 +2,8 @@
 import type { TemTemType } from '@maael/temtem-types';
 
 defineProps<{ type: TemTemType }>();
-const typeImgMap = inject(typeKey);
-if (!typeImgMap) {
-  throw new Error('typeImgMap is not defined');
-}
+
+const typeImgMap = useTypeImgMapStore();
 </script>
 
 <template>

@@ -3,7 +3,7 @@ const title = 'Battlefield Layout';
 
 useServerSeoMeta({ titleTemplate: 'Battlefield Layout - %s' });
 
-provide(typeKey, await useTypeImgMap());
+await useTypeImgMapStore().initialize();
 </script>
 
 <template>

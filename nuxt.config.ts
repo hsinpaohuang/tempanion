@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     'nuxt-purgecss',
     'nuxt-simple-sitemap',
     'nuxt-simple-robots',
+    '@pinia/nuxt',
   ],
   routeRules: {
     '/matchup': { isr: 60 * 60 * 2 },
@@ -66,4 +67,6 @@ export default defineNuxtConfig({
     siteUrl: 'https://tempanion.hsinpaohuang.com',
     exclude: ['/'],
   },
+  imports: { dirs: ['./stores'] },
+  pinia: { autoImports: ['defineStore', 'acceptHMRUpdate'] },
 });

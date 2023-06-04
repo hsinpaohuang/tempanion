@@ -9,7 +9,7 @@ export type Weakness = Readonly<[TemTemType, number]>;
 
 export type CondensedApiTem = Pick<
   TemTemApiTem,
-  'name' | 'portraitWikiUrl' | 'types'
+  'number' | 'name' | 'portraitWikiUrl' | 'types'
 > & {
   weaknesses: Record<TemTemType, number>;
   /** from fuse.js search result */
