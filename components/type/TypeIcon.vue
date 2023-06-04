@@ -26,6 +26,7 @@ if (!typeImgMap) {
 <style scoped>
 .type-icon {
   object-fit: contain;
-  max-width: 55px;
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

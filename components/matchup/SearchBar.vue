@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ionSearchOutline, ionCloseOutline } from '@quasar/extras/ionicons-v7';
+import { ionSearch, ionClose } from '@quasar/extras/ionicons-v7';
 
 const emits = defineEmits<{ search: [string] }>();
 
@@ -32,14 +32,14 @@ onMounted(() => {
     :debounce="300"
     type="search"
     placeholder="Search by name or type"
-    :clear-icon="ionCloseOutline"
+    :clear-icon="ionClose"
     clearable
     filled
     @update:model-value="onSearch"
     @clear="searchText = ''"
   >
     <template v-slot:append>
-      <QIcon :name="ionSearchOutline" />
+      <QIcon :name="ionSearch" />
     </template>
   </QInput>
 </template>

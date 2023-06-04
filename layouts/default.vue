@@ -1,17 +1,36 @@
 <script setup lang="ts">
 import {
-  ionMenuOutline,
-  ionSearchOutline,
+  ionMenu,
+  ionSearch,
   ionMoon,
   ionSunny,
   ionArrowUp,
 } from '@quasar/extras/ionicons-v7';
+import { mdiSwordCross } from '@quasar/extras/mdi-v7';
 import { debounce } from 'quasar';
 
+// for preventing FOUC
+useHead({
+  script: [
+    {
+      children: `
+      const dark = localStorage.getItem('dark');
+      if (dark !== null) {
+        document.body.classList.add(dark === '1' ? 'body--dark' : 'body--light');
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('body--dark');
+      }
+      `,
+      tagPosition: 'bodyOpen',
+    },
+  ],
+});
+
 const { dark } = useQuasar();
+const router = useRouter();
 
 const showDrawer = useState(() => false);
-const miniState = useState(() => false);
+const miniState = useState(() => true);
 
 const isDarkMode = computed({
   get: () => dark.isActive,
@@ -47,33 +66,22 @@ if (process.client) {
   });
 }
 
-// for preventing FOUC
-useHead({
-  script: [
-    {
-      children: `
-      const dark = localStorage.getItem('dark');
-      if (dark !== null) {
-        document.body.classList.add(dark === '1' ? 'body--dark' : 'body--light');
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('body--dark');
-      }
-      `,
-      tagPosition: 'bodyOpen',
-    },
-  ],
-});
+const menuItems = [
+  { title: 'Matchup Search', icon: ionSearch, path: '/matchup' },
+  { title: 'Battlefield', icon: mdiSwordCross, path: '/battlefield' },
+  { title: 'test', icon: mdiSwordCross, path: '/test' },
+];
 </script>
 
 <template>
   <QLayout view="hHh Lpr lff">
-    <QHeader elevated>
+    <QHeader elevated class="header">
       <QToolbar>
         <QBtn
           flat
           round
           dense
-          :icon="ionMenuOutline"
+          :icon="ionMenu"
           @click="showDrawer = !showDrawer"
         />
         <QToolbarTitle>Tempanion</QToolbarTitle>
@@ -89,31 +97,47 @@ useHead({
       </QToolbar>
     </QHeader>
 
-    <!-- TODO: add show-if-above when there are other pages to navigate to -->
     <QDrawer
       v-model="showDrawer"
       :mini="miniState"
       @mouseover="miniState = false"
       @mouseout="miniState = true"
-      :width="200"
+      :width="250"
       :breakpoint="500"
       bordered
-      :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'"
+      show-if-above
+      mini-to-overlay
+      :class="$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-4'"
     >
-      <QScrollArea class="fit" :horizontal-thumb-style="{ opacity: '0' }">
+      <QScrollArea :horizontal-thumb-style="{ opacity: '0' }" class="fit">
         <QList padding>
-          <QItem clickable v-ripple>
+          <QItem
+            v-for="item in menuItems"
+            :key="item.path"
+            v-ripple
+            active-class="text-deep-purple-4"
+            clickable
+            @click="goTo(router, item.path)"
+          >
             <QItemSection avatar>
-              <QIcon :name="ionSearchOutline" />
+              <QIcon :name="item.icon" class="nav-icon" />
             </QItemSection>
-            <QItemSection>Matchup</QItemSection>
+            <QItemSection class="nav-text">{{ item.title }}</QItemSection>
           </QItem>
         </QList>
       </QScrollArea>
     </QDrawer>
 
-    <QPageContainer class="default-page column">
-      <NuxtPage class="page" />
+    <QPageContainer class="default-page">
+      <RouterView v-slot="{ Component }">
+        <transition
+          mode="out-in"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
+          <component :is="Component" />
+        </transition>
+      </RouterView>
       <transition
         appear
         enter-active-class="animated fadeIn"
@@ -132,13 +156,14 @@ useHead({
 </template>
 
 <style scoped lang="scss">
-.default-page {
-  height: 100vh;
+@media screen and (min-width: 501px) {
+  .header {
+    z-index: 3001;
+  }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+.default-page {
+  height: 100vh;
 }
 
 .dark-mode-toggle :deep(.q-toggle__track) {

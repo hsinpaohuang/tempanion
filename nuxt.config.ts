@@ -13,9 +13,6 @@ export default defineNuxtConfig({
   routeRules: {
     '/matchup': { isr: 60 * 60 * 2 },
   },
-  app: {
-    pageTransition: true,
-  },
   css: ['~/assets/styles/global.scss'],
   quasar: {
     plugins: ['Dark'],
