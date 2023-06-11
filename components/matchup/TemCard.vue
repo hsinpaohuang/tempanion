@@ -22,7 +22,7 @@ defineProps<{ tem: Tem }>();
     </QItem>
     <QSeparator />
     <QItem class="q-pb-md">
-      <MatchupList :weaknesses="tem.weaknesses" />
+      <MatchupList :name="tem.name" :weaknesses="tem.weaknesses" mode="enemy" />
     </QItem>
   </QCard>
 </template>

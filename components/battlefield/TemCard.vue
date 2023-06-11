@@ -1,44 +1,102 @@
 <script setup lang="ts">
-import { TemTemType } from '@maael/temtem-types';
-import { ionReload, ionWarning } from '@quasar/extras/ionicons-v7';
+import {
+  ionReload,
+  ionChevronBack,
+  ionChevronForward,
+} from '@quasar/extras/ionicons-v7';
+import type { Place } from '~/utils/types/battlefield';
 
-const { dark } = useQuasar();
+const props = defineProps<{ place: Place }>();
+
+const { dark, dialog } = useQuasar();
+const temtemStore = useTemtemStore();
+const battlefieldStore = useBattlefieldStore();
+
+const selectedTemtem = computed(
+  () => temtemStore.temtemMap[battlefieldStore[props.place]],
+);
+
+const tab = ref('portrait');
+
+function showSearchModal() {
+  dialog({
+    component: defineAsyncComponent(
+      () => import('~/components/battlefield/SearchTemtemModal.vue'),
+    ),
+  }).onOk((id: number) => {
+    battlefieldStore[props.place] = id;
+  });
+}
 </script>
 
 <template>
   <QCard flat :bordered="!dark.isActive" class="column no-wrap">
-    <QCardSection class="title-row row justify-center items-center no-wrap-md">
+    <QCardSection class="title-row row justify-center items-center no-wrap">
       <h2 class="text-h5 text-center truncate-1 q-my-none">
-        {{ fakeData.name }}
+        {{ selectedTemtem.name }}
       </h2>
-      <TypeIcon
-        v-for="temType in fakeData.types"
-        :key="temType"
-        :type="(temType as TemTemType)"
-        class="icon"
-      />
       <div class="actions-container flex no-wrap">
-        <div class="tooltip-container">
-          <QIcon :name="ionWarning" color="negative" class="icon" />
-          <QTooltip class="text-body2">Test</QTooltip>
-        </div>
-        <QBtn flat dense :icon="ionReload" class="icon q-pa-none" />
+        <QBtn
+          flat
+          dense
+          :icon="ionReload"
+          class="icon q-pa-none"
+          @click="showSearchModal"
+        />
       </div>
     </QCardSection>
-    <QCardSection class="portrait-container flex justify-center align-center">
-      <img
-        :src="fakeData.wikiRenderAnimatedUrl"
-        :alt="fakeData.name"
-        class="portrait"
-      />
+    <QCardSection
+      class="portrait-container flex-1 column justify-center align-center q-pa-none"
+    >
+      <QTabs
+        v-model="tab"
+        :mobile-arrows="false"
+        :left-icon="ionChevronBack"
+        :right-icon="ionChevronForward"
+        outside-arrows
+        stretch
+        dense
+        class="lt-md"
+      >
+        <QTab name="portrait" class="tab flex-1 q-px-xs">Portrait</QTab>
+        <QTab name="profile" class="tab flex-1 q-px-xs">Profile</QTab>
+      </QTabs>
+      <QTabPanels v-model="tab" animated class="lt-md flex-1">
+        <QTabPanel name="portrait">
+          <QImg
+            :src="selectedTemtem.wikiRenderAnimatedUrl"
+            :alt="selectedTemtem.name"
+            loading="eager"
+            fit="contain"
+            class="portrait"
+          />
+        </QTabPanel>
+        <QTabPanel name="profile" class="profile column no-wrap justify-evenly">
+          <BattlefieldTemtemProfile :place="place" />
+        </QTabPanel>
+      </QTabPanels>
+      <div class="desktop-layout gt-sm row items-center full-height q-pa-md">
+        <QImg
+          :src="selectedTemtem.wikiRenderAnimatedUrl"
+          :alt="selectedTemtem.name"
+          loading="eager"
+          fit="contain"
+          class="portrait"
+        />
+        <BattlefieldTemtemProfile :place="place" />
+      </div>
     </QCardSection>
   </QCard>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .title-row,
 .actions-container {
   gap: 8px;
+}
+
+.tab {
+  width: 50%;
 }
 
 .icon {
@@ -51,8 +109,19 @@ const { dark } = useQuasar();
 }
 
 .portrait {
-  object-fit: contain;
   max-width: 100%;
   max-height: 100%;
+}
+
+.profile {
+  min-height: 100%;
+  height: auto !important;
+}
+
+.desktop-layout {
+  gap: 16px;
+  > * {
+    width: calc(50% - 8px);
+  }
 }
 </style>

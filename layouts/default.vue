@@ -69,7 +69,6 @@ if (process.client) {
 const menuItems = [
   { title: 'Matchup Search', icon: ionSearch, path: '/matchup' },
   { title: 'Battlefield', icon: mdiSwordCross, path: '/battlefield' },
-  { title: 'test', icon: mdiSwordCross, path: '/test' },
 ];
 </script>
 

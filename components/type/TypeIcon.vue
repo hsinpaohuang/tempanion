@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import type { TemTemType } from '@maael/temtem-types';
 
-defineProps<{ type: TemTemType }>();
+withDefaults(
+  defineProps<{
+    type: TemTemType;
+    width?: number;
+    height?: number;
+    loading?: 'eager' | 'lazy';
+  }>(),
+  { width: 55, height: 55, loading: 'eager' },
+);
 
 const typeImgMap = useTypeImgMapStore();
 </script>
@@ -9,11 +17,13 @@ const typeImgMap = useTypeImgMapStore();
 <template>
   <div v-once class="row items-center">
     <img
-      :src="typeImgMap[type]"
-      alt="type"
-      width="55"
-      height="55"
+      :src="typeImgMap.map[type]"
+      :alt="type"
+      :width="width"
+      :height="height"
+      :loading="loading"
       class="type-icon full-width"
+      @contextmenu.prevent
     />
     <QTooltip class="text-body2" :hide-delay="300">
       {{ type }}

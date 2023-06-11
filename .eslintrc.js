@@ -18,7 +18,10 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'vue/multi-word-component-names': 'off',
-    'vue/html-self-closing': '1',
+    'vue/html-self-closing': [
+      'error',
+      { html: { void: 'always', normal: 'always', component: 'always' } },
+    ],
     '@typescript-eslint/naming-convention': [
       'warn',
       {

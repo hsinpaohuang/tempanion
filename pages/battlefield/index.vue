@@ -1,32 +1,38 @@
 <script setup lang="ts">
 const title = 'Battlefield Layout';
 
-useServerSeoMeta({ titleTemplate: 'Battlefield Layout - %s' });
+useServerSeoMeta({
+  titleTemplate: 'Battlefield Layout - %s',
+  description: 'Check type advantages in a 2v2 matchup',
+});
 
-await useTypeImgMapStore().initialize();
+await Promise.all([
+  useTemtemStore().initialize(),
+  useTypeImgMapStore().initialize(),
+]);
 </script>
 
 <template>
   <QPage
-    class="column no-wrap items-center full-height q-mx-sm q-mx-md-xl q-pb-xl"
+    class="column no-wrap items-center full-height q-mx-sm q-mx-md-xl q-pb-lg"
   >
     <h1 class="text-h3 text-center">{{ title }}</h1>
     <div class="battlefield full-width flex-1">
       <div class="column no-wrap">
-        <h3 class="text-h5 text-center">Enemy 1</h3>
-        <BattlefieldTemCard />
+        <h3 class="text-subtitle1 text-center q-my-sm">Enemy 1</h3>
+        <BattlefieldTemCard place="enemy1" class="flex-1" />
       </div>
       <div class="column no-wrap">
-        <h3 class="text-h5 text-center">Enemy 2</h3>
-        <BattlefieldTemCard />
+        <h3 class="text-subtitle1 text-center q-my-sm">Enemy 2</h3>
+        <BattlefieldTemCard place="enemy2" class="flex-1" />
       </div>
       <div class="column no-wrap">
-        <h3 class="text-h5 text-center">Friendly 1</h3>
-        <BattlefieldTemCard />
+        <h3 class="text-subtitle1 text-center q-my-sm">Friendly 1</h3>
+        <BattlefieldTemCard place="friendly1" class="flex-1" />
       </div>
       <div class="column no-wrap">
-        <h3 class="text-h5 text-center">Friendly 2</h3>
-        <BattlefieldTemCard />
+        <h3 class="text-subtitle1 text-center q-my-sm">Friendly 2</h3>
+        <BattlefieldTemCard place="friendly2" class="flex-1" />
       </div>
     </div>
   </QPage>
