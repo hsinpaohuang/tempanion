@@ -9,6 +9,10 @@ h1 {
   padding-block-end: 0.67em;
 }
 
+.q-btn.manually-disabled .q-focus-helper {
+  opacity: 0 !important;
+}
+
 // To prevent FOUC
 body.body--dark .q-card {
   background-color: var(--q-dark);

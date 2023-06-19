@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { Weakness } from '~/utils/types/tem';
+import type { TemDisplayMode } from '~/utils/types/sharedTypes';
 
 const props = defineProps<{
   name: string;
   weaknesses: Readonly<Weakness[]>;
-  mode: 'friendly' | 'enemy';
+  mode: TemDisplayMode;
 }>();
 
 defineEmits([...useDialogPluginComponent.emits]);

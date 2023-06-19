@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { TemDisplayMode } from '~/utils/types/sharedTypes';
 import { Tem } from '~/utils/types/tem';
 
 const { dark } = useQuasar();
@@ -22,7 +23,11 @@ defineProps<{ tem: Tem }>();
     </QItem>
     <QSeparator />
     <QItem class="q-pb-md">
-      <MatchupList :name="tem.name" :weaknesses="tem.weaknesses" mode="enemy" />
+      <MatchupList
+        :name="tem.name"
+        :weaknesses="tem.weaknesses"
+        :mode="TemDisplayMode.Enemy"
+      />
     </QItem>
   </QCard>
 </template>

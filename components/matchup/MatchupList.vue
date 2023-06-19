@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { TemDisplayMode } from '~/utils/types/sharedTypes';
 import { Weakness } from '~/utils/types/tem';
+
 const weaknessClassMap: Readonly<Record<string, string>> = Object.freeze({
   4: 'bg-w-4',
   2: 'bg-w-2',
@@ -10,29 +12,29 @@ const weaknessClassMap: Readonly<Record<string, string>> = Object.freeze({
 const props = defineProps<{
   name: string;
   weaknesses: Readonly<Weakness[]>;
-  mode: 'enemy' | 'friendly';
+  mode: TemDisplayMode;
 }>();
 
 const matchupTitle = computed(
   () =>
-    `${props.name} as ${props.mode === 'enemy' ? 'an' : 'a'} ${
+    `${props.name} as ${props.mode === TemDisplayMode.Enemy ? 'an' : 'a'} ${
       props.mode
     } is...`,
 );
 
 const calculatedWeaknesses = computed(() =>
-  props.mode === 'enemy'
+  props.mode === TemDisplayMode.Enemy
     ? props.weaknesses
     : props.weaknesses.map<Weakness>(w => [w[0], 1 / w[1]]).reverse(),
 );
 const uses = computed(() => calculatedWeaknesses.value.filter(w => w[1] > 1));
 const usesText = computed(() =>
-  props.mode === 'enemy' ? 'Weak against' : 'Strong against',
+  props.mode === TemDisplayMode.Enemy ? 'Weak against' : 'Strong against',
 );
 
 const avoids = computed(() => calculatedWeaknesses.value.filter(w => w[1] < 1));
 const avoidsText = computed(() =>
-  props.mode === 'enemy' ? 'Strong against' : 'Weak against',
+  props.mode === TemDisplayMode.Enemy ? 'Strong against' : 'Weak against',
 );
 
 function getWeaknessClass(weakness: number) {

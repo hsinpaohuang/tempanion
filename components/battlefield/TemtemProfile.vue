@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ionInformationCircleOutline } from '@quasar/extras/ionicons-v7';
 import type { Place } from '~/utils/types/battlefield';
+import { TemDisplayMode } from '~/utils/types/sharedTypes';
 
 const props = defineProps<{ place: Place }>();
 
@@ -24,7 +25,9 @@ function showMatchupModal() {
     componentProps: {
       name: selectedTemtem.value.name,
       weaknesses: selectedTemtem.value.weaknesses,
-      mode: props.place.startsWith('friendly') ? 'friendly' : 'enemy',
+      mode: props.place.startsWith('friendly')
+        ? TemDisplayMode.Friendly
+        : TemDisplayMode.Enemy,
     },
   });
 }

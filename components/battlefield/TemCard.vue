@@ -5,6 +5,7 @@ import {
   ionChevronForward,
 } from '@quasar/extras/ionicons-v7';
 import type { Place } from '~/utils/types/battlefield';
+import { TemDisplayMode } from '~/utils/types/sharedTypes';
 
 const props = defineProps<{ place: Place }>();
 
@@ -23,8 +24,17 @@ function showSearchModal() {
     component: defineAsyncComponent(
       () => import('~/components/battlefield/SearchTemtemModal.vue'),
     ),
+    componentProps: {
+      mode: props.place.startsWith('friendly')
+        ? TemDisplayMode.Friendly
+        : TemDisplayMode.Enemy,
+      selectedTemId: selectedTemtem.value.number,
+    },
   }).onOk((id: number) => {
     battlefieldStore[props.place] = id;
+    if (props.place.startsWith('enemy')) {
+      battlefieldStore.addRecentlySelected(id);
+    }
   });
 }
 </script>

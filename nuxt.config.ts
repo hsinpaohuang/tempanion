@@ -10,11 +10,14 @@ export default defineNuxtConfig({
     'nuxt-simple-sitemap',
     'nuxt-simple-robots',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
   routeRules: {
     '/matchup': { isr: 60 * 60 * 2 },
+    '/battlefield': { isr: 60 * 60 * 2 },
   },
   css: ['~/assets/styles/global.scss'],
+  vue: { defineModel: true },
   quasar: {
     plugins: ['Dark', 'Dialog'],
     config: {
@@ -67,6 +70,7 @@ export default defineNuxtConfig({
       /q-select/,
       /q-focus-helper/,
       /q-manual-focusable/,
+      /q-btn--no-uppercase/,
       /fixed-full/,
       /justify-end/,
       /warning/,
