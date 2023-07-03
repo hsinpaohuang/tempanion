@@ -8,7 +8,7 @@
     "preview": "yarn build && nuxt preview",
     "postinstall": "nuxt prepare",
     "prepare": "nuxt prepare",
-    "deploy:vercel": "NITRO_PRESET=vercel-edge yarn build"
+    "deploy:vercel": "yarn build"
   },
   "devDependencies": {
     "@maael/temtem-types": "^1.0.2",
