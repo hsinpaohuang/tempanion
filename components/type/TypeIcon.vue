@@ -25,7 +25,15 @@ const typeImgMap = useTypeImgMapStore();
       class="type-icon full-width"
       @contextmenu.prevent
     />
-    <QTooltip class="text-body2" :hide-delay="300">
+    <QTooltip
+      class="text-body2"
+      :hide-delay="300"
+      anchor="top middle"
+      self="bottom middle"
+      :offset="[10, 10]"
+      transition-show="jump-up"
+      transition-hide="jump-down"
+    >
       {{ type }}
     </QTooltip>
   </div>
