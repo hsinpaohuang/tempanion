@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-simple-robots',
     '@pinia/nuxt',
     '@vueuse/nuxt',
+    'nuxt-vitest',
   ],
   routeRules: {
     '/matchup': { isr: 60 * 60 * 2 },

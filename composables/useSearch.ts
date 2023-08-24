@@ -14,11 +14,10 @@ export function useSearch<T>(
     const exactMatch = searchResult.find(
       ({ score }) => score && score < 10e-10,
     );
-    if (exactMatch) {
-      return [exactMatch.item];
-    } else {
-      return searchResult.map(({ item }) => item);
-    }
+
+    return exactMatch
+      ? [exactMatch.item]
+      : searchResult.map(({ item }) => item);
   }
 
   return search;

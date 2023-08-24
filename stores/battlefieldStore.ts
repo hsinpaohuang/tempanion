@@ -28,6 +28,7 @@ export const useBattlefieldStore = defineStore('battlefield', {
   },
   actions: {
     addRecentlySelected(id: number) {
+      // check if ID already exists, if it does, delete it (will be inserted to first position)
       const existingIdIndex = this.recentlySelected.value.findIndex(
         i => i === id,
       );
@@ -37,6 +38,7 @@ export const useBattlefieldStore = defineStore('battlefield', {
 
       this.recentlySelected.value.unshift(id);
 
+      // if there are more than 10, remove the last one
       if (this.recentlySelected.value.length > RECENTLY_SELECTED_MAX_LENGTH) {
         this.recentlySelected.value.pop();
       }
@@ -45,12 +47,15 @@ export const useBattlefieldStore = defineStore('battlefield', {
       if (this.team.value.length >= 6) {
         throw new Error('team is already full');
       }
+
       this.team.value.push(id);
     },
     setTeamMember(index: number, id: number | undefined) {
       if (id === undefined) {
+        // remove if no ID is given
         this.team.value.splice(index, 1);
       } else {
+        // replace if ID is given
         this.team.value[index] = id;
       }
     },

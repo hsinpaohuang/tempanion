@@ -14,7 +14,7 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: 'module',
   },
-  plugins: ['prettier'],
+  plugins: ['prettier', 'vitest'],
   rules: {
     'prettier/prettier': 'error',
     'vue/multi-word-component-names': 'off',

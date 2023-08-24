@@ -2,6 +2,9 @@ import type { TemTemApiType } from '@maael/temtem-types';
 
 export type TypeImgMap = Record<string, string>;
 
+/** exported for testing */
+export const TYPES_ENDPOINT_URL = `${TEM_TEM_API_BASE_URL}/api/types`;
+
 export const useTypeImgMapStore = defineStore('typeImgMap', {
   state: (): { map: TypeImgMap } => ({ map: {} }),
   actions: {

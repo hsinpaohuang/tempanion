@@ -15,6 +15,9 @@ const params = new URLSearchParams({
   expand: 'techniques',
 });
 
+/** exported for testing */
+export const TEM_TEMS_ENDPOINT = `${TEM_TEM_API_BASE_URL}/api/temtems?${params.toString()}`;
+
 type State = {
   temtemIds: number[];
   temtemMap: Record<string, Tem>;
@@ -49,14 +52,12 @@ export const useTemtemStore = defineStore('temtems', {
   actions: {
     async initialize() {
       if (!this.temtemIds.length) {
-        const data = await $fetch<CondensedApiTem[]>(
-          `${TEM_TEM_API_BASE_URL}/api/temtems?${params.toString()}`,
-        );
-        if (!data) {
+        const { data } = await useFetch<CondensedApiTem[]>(TEM_TEMS_ENDPOINT);
+        if (!data.value || !data.value.length) {
           throw new Error('Failed to fetch Temtem data');
         }
 
-        const list = data.map(d => TemtemFactory.convert(d));
+        const list = data.value.map(d => TemtemFactory.convert(d));
 
         const { ids, map } = TemtemFactory.normalize(list);
         this.temtemIds = ids;
@@ -64,11 +65,10 @@ export const useTemtemStore = defineStore('temtems', {
       }
 
       if (process.client) {
-        const search = useSearch(this.temtemList, {
+        searcher = useSearch(this.temtemList, {
           keys: [{ name: 'name' }, { name: 'types', weight: 0.1 }],
           threshold: 0.3,
         });
-        searcher = search;
       }
     },
     search(key: string) {

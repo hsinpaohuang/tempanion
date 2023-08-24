@@ -1,7 +1,9 @@
-import type { TemTemApiTechnique, TemTemType } from '@maael/temtem-types';
+import type { TemTemType } from '@maael/temtem-types';
 import type {
+  ApiTechnique,
   CondensedApiTem,
   SynergyType,
+  Technique,
   Tem,
   Weakness,
 } from '~/utils/types/tem';
@@ -34,14 +36,11 @@ export class TemtemFactory {
       .sort((a, b) => b[1] - a[1]) as Weakness[];
   }
 
-  private static convertTechniques(
-    techniques: TemTemApiTechnique[],
-  ): SynergyType {
+  private static convertTechniques(techniques: ApiTechnique[]): Technique[] {
     return techniques.map(t => ({
       name: t.name,
-      type: t.type,
-      // @ts-expect-error typo in @maael/temtem-types
-      synergy: t.synergy,
+      type: t.type as TemTemType,
+      synergy: t.synergy as SynergyType,
     }));
   }
 }
