@@ -1,0 +1,16 @@
+name: Install & Cache Dependencies
+
+description: Loads yarn cache (and save if necessary) and runs yarn install
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+
+    - name: Load Cache
+      uses: ./.github/actions/load-yarn-cache
+
+    - name: Install
+      run: yarn --frozen-lockfile
+      shell: bash
