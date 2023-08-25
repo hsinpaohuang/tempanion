@@ -4,10 +4,10 @@ runs:
   using: composite
   steps:
     - name: Setup
-      uses: ./.github/actions/setup
+      uses: ./.github/actions/setup.yml
 
     - name: Load Cache
-      uses: ./.github/actions/load-yarn-cache
+      uses: ./.github/actions/load-yarn-cache.yml
 
     - name: Install
       run: yarn --frozen-lockfile
