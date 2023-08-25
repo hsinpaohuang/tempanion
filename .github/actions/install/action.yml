@@ -1,12 +1,15 @@
-name: Install & Cache Dependencies
+name: Setup Node & Install Dependencies
 
-description: Runs setup and yarn install
+description: Setup Node & Install Dependencies
 
 runs:
   using: composite
   steps:
-    - name: Setup
-      uses: ./.github/actions/setup
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: .nvmrc
+        cache: yarn
 
     - name: Install
       run: yarn --frozen-lockfile
