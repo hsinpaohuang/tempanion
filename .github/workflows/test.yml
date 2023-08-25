@@ -23,6 +23,26 @@ jobs:
         uses: ./.github/actions/install
       - name: Run Unit Tests
         run: yarn test:unit
+  unit-tests2:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup and Install
+        uses: ./.github/actions/install
+      - name: Run Unit Tests
+        run: yarn test:unit
+  unit-tests3:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup and Install
+        uses: ./.github/actions/install
+      - name: Run Unit Tests
+        run: yarn test:unit
 
 
 
