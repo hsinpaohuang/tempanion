@@ -6,7 +6,6 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "yarn build && nuxt preview",
-    "postinstall": "nuxt prepare",
     "prepare": "nuxt prepare",
     "deploy:vercel": "yarn build",
     "test:unit": "vitest"
