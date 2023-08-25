@@ -2,7 +2,8 @@ name: Tests
 
 on:
   push:
-    branches: [master, vercel-release]
+    branches: [master, vercel-release, actions]
+
 
 jobs:
   install:
