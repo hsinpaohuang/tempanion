@@ -20,5 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy Project Artifacts to Vercel
+      # Build project on Vercel
+      # vercel CLI is already installed in Github-hosted runners
+      - name: Deploy to Vercel
         run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}

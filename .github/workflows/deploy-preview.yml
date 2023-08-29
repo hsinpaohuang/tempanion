@@ -7,7 +7,6 @@ env:
 on:
   push:
     branches-ignore:
-      - main
       - vercel-release
 
 jobs:
@@ -24,5 +23,7 @@ jobs:
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
 
-      - name: Deploy Project Artifacts to Vercel
+      # Build project on Vercel
+      # vercel CLI is already installed in Github-hosted runners
+      - name: Deploy to Vercel
         run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
