@@ -21,8 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - run: which vercel
-
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
 
