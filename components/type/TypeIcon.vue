@@ -4,9 +4,9 @@ import type { TemTemType } from '@maael/temtem-types';
 withDefaults(
   defineProps<{
     type: TemTemType;
-    width?: number;
-    height?: number;
-    loading?: 'eager' | 'lazy';
+    width?: HTMLImageElement['width'];
+    height?: HTMLImageElement['height'];
+    loading?: HTMLImageElement['loading'];
   }>(),
   { width: 55, height: 55, loading: 'eager' },
 );
