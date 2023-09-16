@@ -22,7 +22,7 @@ const temtemStore = useTemtemStore();
           <QBtn
             :icon="ionClose"
             size="sm"
-            class="q-pa-xs"
+            class="remove-temtem q-pa-xs"
             flat
             dense
             @click.stop="battlefieldStore.setTeamMember(index, undefined)"

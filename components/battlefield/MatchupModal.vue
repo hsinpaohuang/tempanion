@@ -17,7 +17,11 @@ const { dialogRef, onDialogHide, onDialogCancel } = useDialogPluginComponent();
 <template>
   <ClientOnly>
     <QDialog ref="dialogRef" @hide="onDialogHide">
-      <QCard flat :bordered="!dark.isActive" class="flex-1 no-padding">
+      <QCard
+        flat
+        :bordered="!dark.isActive"
+        class="matchup-modal flex-1 no-padding"
+      >
         <QCardSection>
           <MatchupList v-bind="props" />
         </QCardSection>

@@ -61,6 +61,11 @@ if (process.client) {
   }, 200);
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // for testing
+  onMounted(() => {
+    Object.assign(window, { isMounted: true });
+  });
+
   onBeforeUnmount(() => {
     window.removeEventListener('scroll', onScroll);
   });
@@ -107,6 +112,7 @@ const menuItems = [
       show-if-above
       mini-to-overlay
       :class="$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-4'"
+      class="nav-menu"
     >
       <QScrollArea :horizontal-thumb-style="{ opacity: '0' }" class="fit">
         <QList padding>

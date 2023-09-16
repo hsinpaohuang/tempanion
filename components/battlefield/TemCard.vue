@@ -40,7 +40,7 @@ function showSearchModal() {
 </script>
 
 <template>
-  <QCard flat :bordered="!dark.isActive" class="column no-wrap">
+  <QCard flat :bordered="!dark.isActive" class="column no-wrap" :class="place">
     <QCardSection class="title-row row justify-center items-center no-wrap">
       <h2 class="text-h5 text-center truncate-1 q-my-none">
         {{ selectedTemtem.name }}
@@ -50,7 +50,7 @@ function showSearchModal() {
           flat
           dense
           :icon="ionReload"
-          class="icon q-pa-none"
+          class="change-temtem icon q-pa-none"
           @click="showSearchModal"
         />
       </div>

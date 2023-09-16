@@ -1,0 +1,14 @@
+diff --git a/node_modules/talkback/server.js b/node_modules/talkback/server.js
+index 2a5ef99..f3dfbc8 100644
+--- a/node_modules/talkback/server.js
++++ b/node_modules/talkback/server.js
+@@ -98,6 +98,9 @@ var TalkbackServer = /** @class */ (function () {
+                         return [4 /*yield*/, this.requestHandler.handle(req)];
+                     case 1:
+                         fRes = _a.sent();
++                        if (fRes.headers['content-disposition']) {
++                            fRes.headers['content-disposition'] = fRes.headers['content-disposition'][0];
++                        }
+                         res.writeHead(fRes.status, fRes.headers);
+                         res.end(fRes.body);
+                         return [3 /*break*/, 3];

@@ -10,3 +10,6 @@ dist
 .vscode
 .vercel
 coverages
+/test-results/
+/playwright-report/
+/tests/mock-server/tapes/

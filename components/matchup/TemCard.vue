@@ -8,8 +8,8 @@ defineProps<{ tem: Tem }>();
 </script>
 
 <template>
-  <QCard flat :bordered="!dark.isActive">
-    <QItem class="items-center q-pa-md">
+  <QCard flat :bordered="!dark.isActive" class="tem-card">
+    <QItem class="title-row items-center q-pa-md">
       <QAvatar size="55px" class="q-mr-md">
         <img
           :src="tem.portraitWikiUrl"

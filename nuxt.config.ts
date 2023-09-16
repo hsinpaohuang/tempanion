@@ -87,11 +87,13 @@ export default defineNuxtConfig({
   },
   imports: { dirs: ['./stores'] },
   pinia: { autoImports: ['defineStore', 'acceptHMRUpdate'] },
-  nitro: {
-    preset: 'vercel-edge',
-    /** Temtem API's server seems to be at `sfo1`,
-     * so setting our server to `sfo1` too should minimize API roundtrip time
-     */
-    vercel: { regions: ['sfo1'] },
-  },
+  nitro: process.env.MOCK
+    ? undefined // mock server
+    : {
+        preset: 'vercel-edge',
+        /** Temtem API's server seems to be at `sfo1`,
+         * so setting our server to `sfo1` too should minimize API roundtrip time
+         */
+        vercel: { regions: ['sfo1'] },
+      },
 });
