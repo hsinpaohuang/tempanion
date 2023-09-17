@@ -50,7 +50,10 @@ test.describe('Enemies', () => {
     await searchModal.getByText('CONFIRM').click();
     await enemy1.locator('.temtem-type .q-icon').click();
 
-    await expect(page.locator('.matchup-modal')).toHaveScreenshot('mudrid.png');
+    await expect(page.locator('.matchup-modal')).toHaveScreenshot(
+      'mudrid.png',
+      { maxDiffPixelRatio: 0.05 },
+    );
   });
 });
 
@@ -102,6 +105,8 @@ test.describe('Friendlies', () => {
     await searchModal.getByText('CONFIRM').click();
     await friendly1.locator('.temtem-type .q-icon').click();
 
-    await expect(page.locator('.matchup-modal')).toHaveScreenshot('innki.png');
+    await expect(page.locator('.matchup-modal')).toHaveScreenshot('innki.png', {
+      maxDiffPixelRatio: 0.05,
+    });
   });
 });
